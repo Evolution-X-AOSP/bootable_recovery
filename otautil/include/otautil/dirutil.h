@@ -17,6 +17,7 @@
 #ifndef OTAUTIL_DIRUTIL_H_
 #define OTAUTIL_DIRUTIL_H_
 
+#include <limits.h> // PATH_MAX
 #include <sys/stat.h>  // mode_t
 #include <utime.h> // utime/utimbuf
 
@@ -40,5 +41,7 @@ int mkdir_recursively(const std::string& path, mode_t mode, bool strip_filename,
 // As above, but if timestamp is non-NULL, directories will be timestamped accordingly.
 int mkdir_recursively(const std::string& input_path, mode_t mode, bool strip_filename,
                       const selabel_handle* sehnd, const struct utimbuf *timestamp);
+// rm -rf <path>
+int dirUnlinkHierarchy(const char *path);
 
 #endif  // OTAUTIL_DIRUTIL_H_
