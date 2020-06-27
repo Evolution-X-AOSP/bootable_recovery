@@ -197,7 +197,7 @@ bool CheckPackageMetadata(const std::map<std::string, std::string>& metadata, Ot
     return false;
   }
 
-  auto device = android::base::GetProperty("ro.product.device", "");
+  auto device = android::base::GetProperty("ro.build.product", "");
   auto pkg_device = get_value(metadata, "pre-device");
   if (pkg_device != device || pkg_device.empty()) {
     LOG(ERROR) << "Package is for product " << pkg_device << " but expected " << device;

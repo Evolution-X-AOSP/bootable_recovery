@@ -40,7 +40,7 @@ Device::BuiltinAction StartFastboot(Device* device, const std::vector<std::strin
   RecoveryUI* ui = device->GetUI();
 
   std::vector<std::string> title_lines = { "Android Fastboot" };
-  title_lines.push_back("Product name - " + android::base::GetProperty("ro.product.device", ""));
+  title_lines.push_back("Product name - " + android::base::GetProperty("ro.build.product", ""));
   title_lines.push_back("Bootloader version - " + android::base::GetProperty("ro.bootloader", ""));
   title_lines.push_back("Baseband version - " +
                         android::base::GetProperty("ro.build.expect.baseband", ""));

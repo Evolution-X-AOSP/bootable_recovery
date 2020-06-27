@@ -171,7 +171,7 @@ static void VerifyAbUpdateCommands(const std::string& serialno, bool success = t
   TemporaryFile temp_file;
 
   const std::string properties = "some_properties";
-  std::string device = android::base::GetProperty("ro.product.device", "");
+  std::string device = android::base::GetProperty("ro.build.product", "");
   ASSERT_NE("", device);
   std::string timestamp = android::base::GetProperty("ro.build.date.utc", "");
   ASSERT_NE("", timestamp);
