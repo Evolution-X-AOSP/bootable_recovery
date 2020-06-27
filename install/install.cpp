@@ -213,7 +213,7 @@ bool CheckPackageMetadata(const std::map<std::string, std::string>& metadata, Ot
     return false;
   }
 
-  auto device = android::base::GetProperty("ro.product.device", "");
+  auto device = android::base::GetProperty("ro.build.product", "");
   auto pkg_device = get_value(metadata, "pre-device");
   // device name can be a | separated list, so need to check
   if (pkg_device.empty() || !isInStringList(device, pkg_device, FINGERPRING_SEPARATOR ":" ",")) {
