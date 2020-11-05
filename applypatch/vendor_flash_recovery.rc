@@ -5,4 +5,7 @@ service vendor_flash_recovery /vendor/bin/install-recovery.sh
 
 # update recovery if enabled
 on property:persist.vendor.recovery_update=true
+
+# Get execute only if the prop is setup
+on property:persist.vendor.flash.recovery=1
     start vendor_flash_recovery
