@@ -156,9 +156,6 @@ int Device::HandleMenuKey(int key, bool visible) {
     case KEY_BACK:
       return kGoBack;
 
-    case KEY_REFRESH:
-      return kRefresh;
-
     case KEY_AGAIN:
       return kDoSideload;
 

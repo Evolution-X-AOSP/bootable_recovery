@@ -1444,9 +1444,6 @@ size_t ScreenRecoveryUI::ShowMenu(std::unique_ptr<Menu>&& menu, bool menu_only,
           break;
         case Device::kNoAction:
           break;
-        case Device::kRefresh:
-          chosen_item = Device::kRefresh;
-          break;
         case Device::kGoBack:
           chosen_item = Device::kGoBack;
           break;
