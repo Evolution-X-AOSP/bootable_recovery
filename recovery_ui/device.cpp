@@ -31,9 +31,9 @@ typedef std::pair<std::string, Device::BuiltinAction> menu_action_t;
 
 static std::vector<std::string> g_main_header{};
 static std::vector<menu_action_t> g_main_actions{
-  { "Reboot system now", Device::REBOOT },
-  { "Apply update", Device::APPLY_UPDATE },
-  { "Factory reset", Device::MENU_WIPE },
+  { "Install", Device::APPLY_UPDATE },
+  { "Reboot to system", Device::REBOOT },
+  { "Wipe options", Device::MENU_WIPE },
   { "Advanced", Device::MENU_ADVANCED },
 };
 
@@ -51,7 +51,7 @@ static std::vector<menu_action_t> g_advanced_actions{
   { "Power off", Device::SHUTDOWN },
 };
 
-static std::vector<std::string> g_wipe_header{ "Factory reset" };
+static std::vector<std::string> g_wipe_header{ "Wipe options" };
 static std::vector<menu_action_t> g_wipe_actions{
   { "Format data/factory reset", Device::WIPE_DATA },
   { "Format cache partition", Device::WIPE_CACHE },
