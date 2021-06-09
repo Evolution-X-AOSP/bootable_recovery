@@ -153,7 +153,7 @@ static bool CheckAbSpecificMetadata(const std::map<std::string, std::string>& me
     return false;
   }
 
-  auto device_fingerprint = android::base::GetProperty("ro.build.fingerprint", "");
+  auto device_fingerprint = android::base::GetProperty("ro.product.build.fingerprint", "");
   auto pkg_pre_build_fingerprint = get_value(metadata, "pre-build");
   if (!pkg_pre_build_fingerprint.empty() &&
       !isInStringList(device_fingerprint, pkg_pre_build_fingerprint, FINGERPRING_SEPARATOR)) {
