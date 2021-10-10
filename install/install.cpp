@@ -163,7 +163,7 @@ static bool CheckAbSpecificMetadata(const std::map<std::string, std::string>& me
   }
 
   // Check for downgrade version.
-  int64_t build_timestamp =
+  /*int64_t build_timestamp =
       android::base::GetIntProperty("ro.build.date.utc", std::numeric_limits<int64_t>::max());
   int64_t pkg_post_timestamp = 0;
   // We allow to full update to the same version we are running, in case there
@@ -183,7 +183,7 @@ static bool CheckAbSpecificMetadata(const std::map<std::string, std::string>& me
       LOG(ERROR) << "Downgrade package must have a pre-build version set, not allowed.";
       return false;
     }
-  }
+  }*/
 
   return true;
 }
