@@ -239,8 +239,8 @@ TEST_F(UpdaterTest, getprop) {
            "getprop(\"ro.build.product\")",
            kNoCause);
 
-    expect(android::base::GetProperty("ro.build.fingerprint", "").c_str(),
-           "getprop(\"ro.build.fingerprint\")",
+    expect(android::base::GetProperty("ro.system_ext.build.fingerprint", "").c_str(),
+           "getprop(\"ro.system_ext.build.fingerprint\")",
            kNoCause);
 
     // getprop() accepts only one parameter.
