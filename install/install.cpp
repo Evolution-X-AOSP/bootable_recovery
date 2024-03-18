@@ -380,7 +380,7 @@ static bool PerformPowerwashIfRequired(ZipArchiveHandle zip, Device *device) {
   const auto payload_properties = ExtractPayloadProperties(zip);
   if (payload_properties.find("POWERWASH=1") != std::string::npos) {
     LOG(INFO) << "Payload properties has POWERWASH=1, wiping userdata...";
-    return WipeData(device);
+    return WipeData(device, volume_for_mount_point("/data")->fs_type, false);
   }
   return true;
 }

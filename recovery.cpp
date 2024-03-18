@@ -340,7 +340,7 @@ static InstallResult prompt_and_wipe_data(Device* device) {
 
     if (ask_to_wipe_data(device)) {
       CHECK(device->GetReason().has_value());
-      if (WipeData(device)) {
+      if (WipeData(device, volume_for_mount_point("/data")->fs_type, false)) {
         return INSTALL_SUCCESS;
       } else {
         return INSTALL_ERROR;
@@ -581,10 +581,10 @@ change_menu:
           if (fs == "")
             break;
           if (ask_to_wipe_data(device)) {
-            WipeData(device, fs);
+            WipeData(device, fs, should_keep_memtag_mode);
           }
         } else {
-          WipeData(device);
+          WipeData(device, volume_for_mount_point("/data")->fs_type, false);
           return Device::NO_ACTION;
         }
         break;
@@ -982,7 +982,7 @@ Device::BuiltinAction start_recovery(Device* device, const std::vector<std::stri
   } else if (should_wipe_data) {
     save_current_log = true;
     CHECK(device->GetReason().has_value());
-    if (!WipeData(device, fs, should_keep_memtag_mode)) {
+    if (!WipeData(device, volume_for_mount_point("/data")->fs_type, should_keep_memtag_mode)) {
       status = INSTALL_ERROR;
     }
   } else if (should_prompt_and_wipe_data) {

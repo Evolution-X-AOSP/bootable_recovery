@@ -385,7 +385,7 @@ InstallResult ApplyFromAdb(Device* device, bool rescue_mode, Device::BuiltinActi
         "to the device with \"adb sideload <filename>\"...\n");
   } else {
     command_map.emplace(MinadbdCommand::kWipeData, [&device]() {
-      bool result = WipeData(device);
+      bool result = WipeData(device, volume_for_mount_point("/data")->fs_type, false);
       return std::make_pair(result, true);
     });
     command_map.emplace(MinadbdCommand::kNoOp, []() { return std::make_pair(true, true); });

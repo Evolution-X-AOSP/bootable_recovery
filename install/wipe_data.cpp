@@ -174,7 +174,7 @@ bool WipeData(Device* device, std::string fs, bool keep_memtag_mode) {
 }
 
 bool WipeData(Device* device) {
-  return WipeData(device, volume_for_mount_point("/data")->fs_type);
+  return WipeData(device, volume_for_mount_point("/data")->fs_type, false);
 }
 
 bool WipeSystem(RecoveryUI* ui, const std::function<bool()>& confirm_func) {
