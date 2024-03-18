@@ -982,7 +982,7 @@ Device::BuiltinAction start_recovery(Device* device, const std::vector<std::stri
   } else if (should_wipe_data) {
     save_current_log = true;
     CHECK(device->GetReason().has_value());
-    if (!WipeData(device, should_keep_memtag_mode)) {
+    if (!WipeData(device, fs, should_keep_memtag_mode)) {
       status = INSTALL_ERROR;
     }
   } else if (should_prompt_and_wipe_data) {

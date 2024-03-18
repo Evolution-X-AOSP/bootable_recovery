@@ -134,11 +134,7 @@ bool WipeCache(RecoveryUI* ui, const std::function<bool()>& confirm_func) {
   return success;
 }
 
-<<<<<<< HEAD
-bool WipeData(Device* device, std::string fs) {
-=======
-bool WipeData(Device* device, bool keep_memtag_mode) {
->>>>>>> 224f9af673c0db0aa26e78f632bb3a9bfd73e8e3
+bool WipeData(Device* device, std::string fs, bool keep_memtag_mode) {
   RecoveryUI* ui = device->GetUI();
   ui->Print("\n-- Wiping data...\n");
   ui->SetBackground(RecoveryUI::ERASING);
