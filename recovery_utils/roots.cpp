@@ -165,16 +165,6 @@ int ensure_volume_unmounted(const std::string& blk_device) {
   return 0;
 }
 
-std::vector<std::string> get_data_fs_items() {
-  std::vector<std::string> ret;
-  for (auto& entry : fstab) {
-    if (entry.mount_point == "/data") {
-      ret.emplace_back(entry.fs_type);
-    }
-  }
-  return ret;
-}
-
 static int exec_cmd(const std::vector<std::string>& args) {
   CHECK(!args.empty());
   auto argv = StringVectorToNullTerminatedArray(args);
@@ -216,7 +206,7 @@ static int64_t get_file_size(int fd, uint64_t reserve_len) {
   return computed_size;
 }
 
-int format_volume(const std::string& volume, const std::string& directory, const std::string fs) {
+int format_volume(const std::string& volume, const std::string& directory) {
   const FstabEntry* v = android::fs_mgr::GetEntryForPath(&fstab, volume);
   if (v == nullptr) {
     LOG(ERROR) << "unknown volume \"" << volume << "\"";
@@ -234,8 +224,8 @@ int format_volume(const std::string& volume, const std::string& directory, const
     LOG(ERROR) << "format_volume: Failed to unmount \"" << v->mount_point << "\"";
     return -1;
   }
-  if (fs != "ext4" && fs != "f2fs") {
-    LOG(ERROR) << "format_volume: fs_type \"" << fs << "\" unsupported";
+  if (v->fs_type != "ext4" && v->fs_type != "f2fs") {
+    LOG(ERROR) << "format_volume: fs_type \"" << v->fs_type << "\" unsupported";
     return -1;
   }
 
@@ -280,7 +270,7 @@ int format_volume(const std::string& volume, const std::string& directory, const
     }
   }
 
-  if (fs == "ext4") {
+  if (v->fs_type == "ext4") {
     static constexpr int kBlockSize = 4096;
     std::vector<std::string> mke2fs_args = {
       "/system/bin/mke2fs", "-F", "-t", "ext4", "-b", std::to_string(kBlockSize),
@@ -376,13 +366,7 @@ int format_volume(const std::string& volume, const std::string& directory, const
 }
 
 int format_volume(const std::string& volume) {
-  const FstabEntry* v = android::fs_mgr::GetEntryForPath(&fstab, volume);
-  return format_volume(volume, "", v->fs_type);
-}
-
-int format_volume(const std::string& volume, const std::string& directory) {
-  const FstabEntry* v = android::fs_mgr::GetEntryForPath(&fstab, volume);
-  return format_volume(volume, directory, v->fs_type);
+  return format_volume(volume, "");
 }
 
 int setup_install_mounts() {
